@@ -3,6 +3,7 @@
 <script src="index.js"></script>
 
 <body>
+
     <input crossorigin="anonymous" id="myfile1" accept="image/*" type="file" onchange="
   // img.width=-1;
   //  img.height=-1;
@@ -16,10 +17,11 @@
          img.style.width=getStretchSize(img.width, img.height)[0]+'px';
          img.style.height=getStretchSize(img.width, img.height)[1]+'px';
          myfile1.style.display='none';
+         getByid('button1').style.display = '';
      }
      }
     ">
-    <input crossorigin="anonymous" type="button" id="button1" value="抽取現稿" size="23" onclick="
+    <input crossorigin="anonymous" type="button" id="button1" value="抽取線稿" size="23" onclick="
     button1.disabled='disabled';
  function sleep(time) {
                             return new Promise((resolve) => setTimeout(resolve, time));
@@ -66,4 +68,10 @@
 
     <br>
     <img id="img" crossorigin="anonymous"><img id="img2" crossorigin="anonymous">
+    <script>
+        function getByid(str) {
+            return document.getElementById(str);
+        }
+        getByid("button1").style.display = "none";
+    </script>
 </body>
