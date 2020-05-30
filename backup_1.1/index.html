@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<meta charset="UTF-8">
+
+<head>
+    <title>線稿網　線上抽取線稿</title>
+
+</head>
+<script src="index.js"></script>
+
+<body>
+
+    <input crossorigin="anonymous" id="myfile1" accept="image/*" type="file" onchange="
+  // img.width=-1;
+  //  img.height=-1;
+    /*img.src=event.target.files[0].name;*/
+    let reader=new FileReader();reader.readAsDataURL(this.files[0]);
+     reader.onloadend = function () {    
+         img.src=reader.result;
+         img.onload=function(){
+             originWidth=img.width;
+             originHeight=img.height;
+         img.style.width=getStretchSize(img.width, img.height)[0]+'px';
+         img.style.height=getStretchSize(img.width, img.height)[1]+'px';
+         myfile1.style.display='none';
+         getByid('button1').style.display = '';
+     }
+     }
+    ">
+    <input crossorigin="anonymous" type="button" id="button1" value="抽取線稿" size="23" onclick="
+    button1.disabled='disabled';
+ function sleep(time) {
+                            return new Promise((resolve) => setTimeout(resolve, time));
+                        }
+
+                        // 用法
+                        var sleepTime = false;
+                        sleep(10000).then(() => {
+                            sleepTime = true;
+                        })
+                        // 用法
+                        sleep(100).then(() => {
+
+
+
+     input_image(img);
+        input_image2(img);
+         sharp();
+         img2.src = get_image();
+      img2.onload=function(){
+         img2.style.width=getStretchSize(img2.width, img2.height)[0]+'px';
+         img2.style.height=getStretchSize(img2.width, img2.height)[1]+'px';
+         button1.disabled='';
+     }
+ 
+        })
+
+   
+    ">
+    <br>
+    <font id="VW_font">VW：</font><input type="text" id="VW" value="2" onchange="
+      if (parseInt(this.value)<0)this.value=0;
+    else if (parseInt(this.value)>10)this.value=10;
+    else if (parseInt(this.value)>=0);
+    else this.value=2;
+    " />
+
+    <font id="VH_font">VH：</font><input type="text" id="VH" value="2" onchange="
+    if (parseInt(this.value)<0)this.value=0;
+    else if (parseInt(this.value)>10)this.value=10;
+    else if (parseInt(this.value)>=0);
+    else this.value=2;
+    " />
+    <font id="Smooth_font">Smooth：</font><input type="text" id="Smooth" value="1" onchange="
+      if (parseInt(this.value)<0)this.value=0;
+    else if (parseInt(this.value)>10)this.value=10;
+    else if (parseInt(this.value)>=0);
+    else this.value=1;
+    " />
+    <br>
+    <img id="img" crossorigin="anonymous"><img id="img2" crossorigin="anonymous">
+    <script>
+        function getByid(str) {
+            return document.getElementById(str);
+        }
+        getByid("button1").style.display = "none";
+    </script>
+</body>

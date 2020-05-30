@@ -14,44 +14,39 @@
   //  img.height=-1;
     /*img.src=event.target.files[0].name;*/
     let reader=new FileReader();reader.readAsDataURL(this.files[0]);
-     reader.onloadend = function () {    
-         img.src=reader.result;
-         img.onload=function(){
-             originWidth=img.width;
-             originHeight=img.height;
-         img.style.width=getStretchSize(img.width, img.height)[0]+'px';
-         img.style.height=getStretchSize(img.width, img.height)[1]+'px';
-         myfile1.style.display='none';
-         getByid('button1').style.display = '';
-     }
-     }
+    reader.onloadend = function () {    
+        img.src=reader.result;
+        img.onload=function(){
+            originWidth=img.width;
+            originHeight=img.height;
+        img.style.width=getStretchSize(originWidth, originHeight)[0]+'px';
+        img.style.height=getStretchSize(originWidth, originHeight)[1]+'px';
+        myfile1.style.display='none';
+        getByid('button1').style.display = '';
+        img1_load=true;
+        }
+    }
     ">
+    <input crossorigin="anonymous" type="button" id="reloadButton" value="重新載入" size="23" onclick="window.location.reload();">
     <input crossorigin="anonymous" type="button" id="button1" value="抽取線稿" size="23" onclick="
-    button1.disabled='disabled';
- function sleep(time) {
-                            return new Promise((resolve) => setTimeout(resolve, time));
-                        }
+        button1.disabled='disabled';
+        function sleep(time) { return new Promise((resolve) => setTimeout(resolve, time));}
+        var sleepTime = false;
+        sleep(10000).then(() => {
+            sleepTime = true;
+        })
+        sleep(100).then(() => {
 
-                        // 用法
-                        var sleepTime = false;
-                        sleep(10000).then(() => {
-                            sleepTime = true;
-                        })
-                        // 用法
-                        sleep(100).then(() => {
-
-
-
-     input_image(img);
+        input_image(img);
         input_image2(img);
-         sharp();
-         img2.src = get_image();
-      img2.onload=function(){
-         img2.style.width=getStretchSize(img2.width, img2.height)[0]+'px';
-         img2.style.height=getStretchSize(img2.width, img2.height)[1]+'px';
-         button1.disabled='';
-     }
- 
+        sharp();
+        img2.src = get_image();
+        img2.onload=function(){
+            img2.style.width=getStretchSize(originWidth, originHeight)[0]+'px';
+            img2.style.height=getStretchSize(originWidth, originHeight)[1]+'px';
+            button1.disabled='';
+            img2_load=true;
+        }
         })
 
    
@@ -76,12 +71,24 @@
     else if (parseInt(this.value)>=0);
     else this.value=1;
     " />
+    
     <br>
     <img id="img" crossorigin="anonymous"><img id="img2" crossorigin="anonymous">
     <script>
+        let img1_load=false;
+        let img2_load=false;
         function getByid(str) {
             return document.getElementById(str);
         }
         getByid("button1").style.display = "none";
-    </script>
+        window.onresize=function(){ 
+            if(!img1_load)return;
+            img.style.width=getStretchSize(originWidth, originHeight)[0]+'px';
+            img.style.height=getStretchSize(originWidth, originHeight)[1]+'px';
+            if(!img2_load)return;
+            img2.style.width=getStretchSize(originWidth, originHeight)[0]+'px';
+            img2.style.height=getStretchSize(originWidth, originHeight)[1]+'px';
+         }
+        
+        </script>
 </body>
